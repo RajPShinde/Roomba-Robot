@@ -1,0 +1,20 @@
+<launch>
+  <arg name = "record" default = "false" />
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+  <arg name="world_file" value="/opt/ros/kinetic/share/turtlebot_gazebo/worlds/corridor.world"/>
+  </include>
+  <node
+    pkg="robot_vaccum_cleaner"
+    type="walker"
+    name="walker"
+    output="screen"
+    launch-prefix="gnome-terminal --command"
+  />
+  <node
+    pkg="rosbag"
+    type="record"
+    name="record"
+    args = "-a -O $(find robot_vaccum_cleaner)/results/recording.bag -x /camera/(.*) --duration=25"
+    if = "$(arg record)"
+  />
+</launch>
