@@ -36,8 +36,8 @@
 
 Walker::Walker() {
   flag = false;
-  velocity = 1;
-  heading = 1.0;
+  velocity = 0.5;
+  heading = 5;
   msg.linear.x = 0.0;
   msg.linear.y = 0.0;
   msg.linear.z = 0.0;
@@ -51,15 +51,13 @@ vel.publish(msg);
 }
 
 void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {  
-       float min =1 ;
-       flag = false;
-         for (int i = 0; i < msg->ranges.size(); ++i) {
-        if (msg->ranges[i] < min) {
-            flag = true;
-            ROS_INFO("Obstacle detected");
-            return;
-        }
+  for (int i = 0; i < msg->ranges.size(); ++i) {
+    if (msg->ranges[i] <= 0.6) {
+      flag = true;
+      return;
     }
+  }
+  flag = false;
 }
 
 void Walker::navigate() {
