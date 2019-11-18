@@ -63,7 +63,7 @@ flag = false;
 for (auto m : msg->ranges) {
   if (m < 0.6) {
     flag = true;
-    ROS_INFO("Obstacle detected");
+    ROS_INFO_STREAM("Obstacle detected");
     return;
     }
   }
