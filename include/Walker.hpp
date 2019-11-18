@@ -31,8 +31,8 @@
  *  Walker class with all the methods
  */
 
-#ifndef INCLUDE_WALKER_HPP_
-#define INCLUDE_WALKER_HPP_
+#ifndef CATKIN_WS_SRC_ROBOT_VACCUM_CLEANER_INCLUDE_WALKER_HPP_
+#define CATKIN_WS_SRC_ROBOT_VACCUM_CLEANER_INCLUDE_WALKER_HPP_
 
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
@@ -67,6 +67,7 @@ class Walker {
   * @return None
   */
   void navigate();
+
  private:
   // Creating objects and Node Handler
   ros::NodeHandle n;
@@ -78,4 +79,4 @@ class Walker {
   float velocity, heading;
 };
 
-#endif  // INCLUDE_WALKER_HPP_
+#endif  // CATKIN_WS_SRC_ROBOT_VACCUM_CLEANER_INCLUDE_WALKER_HPP_

@@ -58,7 +58,7 @@ vel.publish(msg);
  * @param sensor_msgs::LaserScan::ConstPtr& msg sensor data
  * @return None
  */
-void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {  
+void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
   for (int i = 0; i < msg->ranges.size(); ++i) {
     if (msg->ranges[i] <= 0.6) {
       flag = true;
@@ -76,7 +76,7 @@ void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
  * @return None
  */
 void Walker::navigate() {
-  // Advertise the velocity data 
+  // Advertise the velocity data
   vel = n.advertise<geometry_msgs::Twist>
          ("/cmd_vel_mux/input/navi", 1000);
 
@@ -87,7 +87,6 @@ void Walker::navigate() {
   ros::Rate loop_rate(10);
 
   while (ros::ok()) {
-
     // Turn if obstacle is detected
     if (flag == true) {
       msg.linear.x = 0.0;

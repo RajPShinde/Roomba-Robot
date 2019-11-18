@@ -1,4 +1,3 @@
-/***************************************************************************
  MIT License
  Copyright © 2019 Raj Shinde
  
@@ -18,33 +17,11 @@
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
- ***************************************************************************/
 
-/**
- *  @copyright MIT License, © 2019 Raj Shinde
- *  @file    main.cpp
- *  @author  Raj Shinde
- *  @date    11/17/2019
- *  @version 1.0
- *  @brief   main file to call walker
- *  @section DESCRIPTION
- *  File to call walker that holdes the node
- */
+rajshinde@rajshinde-Inspiron-3543:~/catkin_ws/src/robot_vaccum_cleaner/src$ cpplint main.cpp
+Done processing main.cpp
+rajshinde@rajshinde-Inspiron-3543:~/catkin_ws/src/robot_vaccum_cleaner/src$ cpplint Walker.cpp
+Done processing Walker.cpp
+rajshinde@rajshinde-Inspiron-3543:~/catkin_ws/src/robot_vaccum_cleaner/include$ cpplint Walker.hpp 
+Done processing Walker.hpp
 
-#include <ros/ros.h>
-#include <Walker.hpp>
-
-/**
- * @brief Main function for calling
- * @param argc no of argumnets 
- * @param argv char pointer consisting arguments 
- * @return 0
- */
-int main(int argc, char **argv) {
-  ros::init(argc, argv, "walker");
-  // Created an object of walker class
-  Walker x;
-  // call to navigate method
-  x.navigate();
-  return 0;
-}
