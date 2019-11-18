@@ -18,11 +18,13 @@
  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.]]
 
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.2.1)
 project(robot_vaccum_cleaner)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
