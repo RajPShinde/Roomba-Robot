@@ -34,9 +34,17 @@
 #include <ros/ros.h>
 #include <Walker.hpp>
 
+/**
+ * @brief Main function for calling
+ * @param argc no of argumnets 
+ * @param argv char pointer consisting arguments 
+ * @return 0
+ */
 int main(int argc, char **argv) {
   ros::init(argc, argv, "walker");
+  // Created an object of walker class
   Walker x;
+  // call to navigate method
   x.navigate();
   return 0;
 }

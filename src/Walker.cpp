@@ -34,7 +34,9 @@
 #include <iostream>
 #include <Walker.hpp>
 
+
 Walker::Walker() {
+  // Initialize variables in constructors
   flag = false;
   velocity = 0.5;
   heading = 5;
@@ -47,44 +49,59 @@ Walker::Walker() {
 }
 
 Walker::~Walker() {
+// Destroy Objects
 vel.publish(msg);
 }
 
+/**
+ * @brief function to detect obstacle
+ * @param sensor_msgs::LaserScan::ConstPtr& msg sensor data
+ * @return None
+ */
 void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {  
   for (int i = 0; i < msg->ranges.size(); ++i) {
     if (msg->ranges[i] <= 0.6) {
       flag = true;
+      // Display LOG Message
+      ROS_INFO_STREAM("Found Obstacle");
       return;
     }
   }
   flag = false;
 }
 
+/**
+ * @brief function to navigate robot
+ * @param None
+ * @return None
+ */
 void Walker::navigate() {
+  // Advertise the velocity data 
   vel = n.advertise<geometry_msgs::Twist>
-                                ("/cmd_vel_mux/input/navi", 1000);
+         ("/cmd_vel_mux/input/navi", 1000);
 
-  
+  // Subscribe to laserScan
   s = n.subscribe <sensor_msgs::LaserScan>
-       ("/scan", 300, &Walker::senseObstacle, this);
+        ("/scan", 300, &Walker::senseObstacle, this);
 
   ros::Rate loop_rate(10);
 
   while (ros::ok()) {
 
+    // Turn if obstacle is detected
     if (flag == true) {
       msg.linear.x = 0.0;
       msg.angular.z = heading;
+      // Display LOG Message
       ROS_INFO("Avoiding Collision");
     } else {
       msg.angular.z = 0.0;
       msg.linear.x = velocity;
     }
 
+    // Publish velocity
     vel.publish(msg);
-
     ros::spinOnce();
-
     loop_rate.sleep();
   }
 }

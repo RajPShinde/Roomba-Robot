@@ -38,18 +38,43 @@
 #include "sensor_msgs/LaserScan.h"
 #include "geometry_msgs/Twist.h"
 
+ /**
+ * @brief Class Walker for robot
+ */
 class Walker {
  public:
- bool flag;
+  bool flag;
+ /**
+  * @brief Default Constructor
+  */
   Walker();
+
+ /**
+  * @brief Default Destructor
+  */
   ~Walker();
+
+ /**
+  * @brief function to detect obstacle
+  * @param sensor_msgs::LaserScan::ConstPtr& msg sensor data
+  * @return None
+  */
   void senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg);
+
+ /**
+  * @brief function to navigate robot
+  * @param None
+  * @return None
+  */
   void navigate();
  private:
+  // Creating objects and Node Handler
   ros::NodeHandle n;
   geometry_msgs::Twist msg;
   ros::Publisher vel;
   ros::Subscriber s;
+
+  // Initializing Private Variables
   float velocity, heading;
 };
 
