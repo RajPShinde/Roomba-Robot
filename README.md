@@ -46,13 +46,13 @@ roslaunch robot_vaccum_cleaner SimLauncher.launch
 ```
 cd ~/catkin_ws/
 source ./devel/setup.bash
-roslaunch robot_vaccum_cleaner SimLauncher.launch record:-true
+roslaunch robot_vaccum_cleaner SimLauncher.launch record:=true
 ```
 To avoid Recording, we can either pass false or dont pass any argument at all
 ```
 cd ~/catkin_ws/
 source ./devel/setup.bash
-roslaunch robot_vaccum_cleaner SimLauncher.launch record:-false
+roslaunch robot_vaccum_cleaner SimLauncher.launch record:=false
 ```
 OR
 ```
