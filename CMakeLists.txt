@@ -25,7 +25,10 @@ project(robot_vaccum_cleaner)
 # add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
+  geometry_msgs
+  move_base_msgs
   roscpp
+  sensor_msgs
   std_msgs
   message_generation
   rospy
@@ -37,6 +40,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 #  generate_messages(
 #    DEPENDENCIES
+#    geometry_msgs
+#    move_base_msgs
+#    sensor_msgs
 #    std_msgs
 #  )
 
@@ -59,7 +65,7 @@ include_directories(
 
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
- add_executable(walker src/main.cpp)
+ add_executable(walker src/main.cpp src/Walker.cpp)
 
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 
