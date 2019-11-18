@@ -59,15 +59,14 @@ vel.publish(msg);
  * @return None
  */
 void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
-  for (int i = 0; i < msg->ranges.size(); ++i) {
-    if (msg->ranges[i] <= 0.6) {
-      flag = true;
-      // Display LOG Message
-      ROS_INFO_STREAM("Found Obstacle");
-      return;
+flag = false;
+for (auto m : msg->ranges) {
+  if (m < 0.6) {
+    flag = true;
+    ROS_INFO("Obstacle detected");
+    return;
     }
   }
-  flag = false;
 }
 
 /**
@@ -77,11 +76,11 @@ void Walker::senseObstacle(const sensor_msgs::LaserScan::ConstPtr& msg) {
  */
 void Walker::navigate() {
   // Advertise the velocity data
-  vel = n.advertise<geometry_msgs::Twist>
+  auto vel = n.advertise<geometry_msgs::Twist>
          ("/cmd_vel_mux/input/navi", 1000);
 
   // Subscribe to laserScan
-  s = n.subscribe <sensor_msgs::LaserScan>
+  auto s = n.subscribe <sensor_msgs::LaserScan>
         ("/scan", 300, &Walker::senseObstacle, this);
 
   ros::Rate loop_rate(10);
